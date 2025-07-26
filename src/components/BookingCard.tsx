@@ -1,17 +1,24 @@
+"use client"
+
 import { useState } from "react";
 import { Package } from "@/store/useAdminStore";
+import BookingModal from "./BookingModal";
+import { useAdminStore } from "@/store/useAdminStore";
 
-interface BookingCardProps {
+interface Props {
     pkg: Package;
-    onBook: (pkgId: string) => void;
+    onBook: (pkgId: string, user: { name: string; email: string; phone: string }) => void;
 }
 
-export default function BookingCard({ pkg, onBook }: BookingCardProps) {
-    const [booked, setBooked] = useState(false);
+export default function BookingCard({ pkg, onBook }: Props) {
+    const [modalOpen, setModalOpen] = useState(false);
 
-    const handleBook = () => {
-        onBook(pkg.id);
-        setBooked(true);
+    const { bookings } = useAdminStore();
+    const booked = bookings.some((b) => b.packageId === pkg.id);
+
+    const handleModalSubmit = (user: { name: string; email: string; phone: string }) => {
+        onBook(pkg.id, user);
+        setModalOpen(false);
     };
 
     return (
@@ -26,9 +33,8 @@ export default function BookingCard({ pkg, onBook }: BookingCardProps) {
                 />
             )}
 
-            <p className="text-gray-600 text-sm mb-1">
-                <strong>Available:</strong>{" "}
-                {new Date(pkg.availableDate).toLocaleDateString()}
+            <p className="text-sm text-gray-600 mb-1">
+                <strong>Available:</strong> {new Date(pkg.availableDate).toLocaleDateString()}
             </p>
 
             <p className="text-gray-800 mb-2">{pkg.description}</p>
@@ -44,11 +50,18 @@ export default function BookingCard({ pkg, onBook }: BookingCardProps) {
                     ? "bg-gray-400 text-white cursor-not-allowed"
                     : "bg-black text-white hover:bg-black/90"
                     }`}
-                onClick={handleBook}
+                onClick={() => setModalOpen(true)}
                 disabled={booked}
             >
                 {booked ? "Booked" : "Book Now"}
             </button>
+
+            <BookingModal
+                open={modalOpen}
+                onClose={() => setModalOpen(false)}
+                onSubmit={handleModalSubmit}
+                pkg={pkg}
+            />
         </div>
     );
 }

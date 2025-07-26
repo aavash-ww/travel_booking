@@ -48,8 +48,11 @@ const DashBoardPage = () => {
                                 key={booking.id}
                                 className='border border-gray-300 shadow-md rounded-md p-4'
                             >
+                                <strong>Name:</strong> <span>{booking.user.name}</span> <br />
+                                <strong>Email:</strong> <span>{booking.user.email}</span> <br />
+                                <strong>Phone:</strong> <span>{booking.user.phone}</span> <br />
                                 <strong>Booking ID:</strong> <span>{booking.id}</span> <br />
-                                <strong>Booking Date:</strong> <span>{booking.date}</span>
+                                <strong>Package ID:</strong> <span>{booking.packageId}</span> <br />
                             </div>
                         )))
                 }

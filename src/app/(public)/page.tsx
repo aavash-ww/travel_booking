@@ -7,15 +7,17 @@ import { useEffect, useState } from "react";
 import SkeletonCard from "@/components/SkeletonCard";
 
 const Homepage = () => {
-
   const { packages, bookings, setBookings } = useAdminStore();
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
-  const handleBooking = (packageId: string) => {
+  const handleBooking = (
+    packageId: string,
+    user: { name: string; email: string; phone: string }
+  ) => {
     const newBooking = {
       id: crypto.randomUUID(),
       packageId,
-      user: "guest_user",
+      user,
       date: new Date().toISOString(),
     };
 
@@ -23,13 +25,11 @@ const Homepage = () => {
     toast.success("You've booked destination.");
   };
 
-  //loader simulatin
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1500);
+    const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
+
 
   return (
     <section className="bg-gray-300 p-8">
@@ -50,9 +50,9 @@ const Homepage = () => {
           ))}
         </div>
       )}
+
     </section>
   );
+};
 
-}
-
-export default Homepage
+export default Homepage;
