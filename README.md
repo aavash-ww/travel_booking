@@ -1,7 +1,7 @@
 ### Credentials
 
 ## Login Credentials
-- go to /admin to access protected routes(middlwware.ts for details)
+- navigate through http://frontend_domain/admin to access protected routes(middlwware.ts for details)
 - email: admin@example.com
 - password: admin123
 
@@ -23,4 +23,4 @@
 - User Selects and Book that Opens Modal fill form and The booking is stored in localstorage using Zustand(persist)
 
 ### Insights 
-- Real Date Picker, Toast messages, Booking Experience, Simulating Auth validation,fake token generation, UUID for packages and Bookings, Modals, Skeleton Loading are considered as per the requirement
+- Real Date Picker, Toast messages, Booking Experience, Simulating Auth validation: fake token generation, 1 hour expiry in token, UUID for packages and Bookings Schemas, Modals, Skeleton Loading are considered as per the requirement
