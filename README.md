@@ -22,5 +22,5 @@
 - Packages created by Admin are rendered in cards
 - User Selects and Book that Opens Modal fill form and The booking is stored in localstorage using Zustand(persist)
 
-## Insights 
+### Insights 
 - Real Date Picker, Toast messages, Booking Experience, Simulating Auth validation,fake token generation, UUID for packages and Bookings, Modals, Skeleton Loading are considered as per the requirement
